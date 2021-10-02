@@ -10,7 +10,7 @@ from discord import Intents
 intent = Intents().all()
 
 
-TOKEN = 'ODgwMzQxMDc5MjE4NTg5NzA2.YSc3hQ.KIaUUzBqyavzwp6qWl5T17QZ23w'
+TOKEN = 'ODgwMzQxMDc5MjE4NTg5NzA2.YSc3hQ.Up3ELgDXpcHH-rvI0R-eEtPLmRQ'
 
 client = commands.Bot(command_prefix='a.')
 
@@ -174,7 +174,10 @@ class MyHelpCommand(commands.MinimalHelpCommand):
 client.help_command = MyHelpCommand()
 
 
-
+@client.command()
+@commands.is_owner()
+async def shutdown(ctx):
+    await ctx.bot.logout()
 
 
 
