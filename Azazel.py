@@ -10,7 +10,7 @@ from discord import Intents
 intent = Intents().all()
 
 
-TOKEN = 'ODgwMzQxMDc5MjE4NTg5NzA2.YSc3hQ.Up3ELgDXpcHH-rvI0R-eEtPLmRQ'
+TOKEN = 'ODgwMzQxMDc5MjE4NTg5NzA2.YSc3hQ.qesm26Kwtc64sk3y4o5LYRBmFYs'
 
 client = commands.Bot(command_prefix='a.')
 

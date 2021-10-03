@@ -112,6 +112,18 @@ class Admin(commands.Cog):
 
         await ctx.send(embed=embed)
 
+    @commands.command(aliases=['src'])
+    async def source(self,ctx):
+        """Gives the source code of the bot."""
+        embed=discord.Embed(
+            title='Source',
+            description='Code of the bot.(Dont copy the code anyways its garbage.)',
+            color=discord.Color.dark_gold()
+        )    
+        view=discord.ui.View()
+        view.add_item(discord.ui.Button(label='Source',url=f'https://github.com/VladimirLalith/AzazelBot',emoji=f'<:pepe_sweat:889902767030796289>'))
+
+        await ctx.send(embed=embed,view=view)
 
 def setup(bot): # a extension must have a setup function
 	bot.add_cog(Admin(bot))         

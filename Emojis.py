@@ -50,7 +50,7 @@ class Emojis(commands.Cog):
     @commands.command(aliases=['ep'])
     async def emojipain(self,ctx):
         """Gives a pain emoji."""
-        await ctx.send(f'<:blobpain:894079093681848330>')  
+        await ctx.send(f'<:painn:810165970453921842>')  
 
     @commands.command(aliases=['ehn'])
     async def emojihmmno(self,ctx):
@@ -65,7 +65,7 @@ class Emojis(commands.Cog):
     @commands.command(aliases=['eg'])
     async def emojigun(self,ctx):
         """Gives gun emoji."""
-        await ctx.send(f'<:pepe_gun:892426023470235678>')       
+        await ctx.send(f'<:pepe_gun:894082377616351262>')       
 
     @commands.command(aliases=['em'])
     async def emojify(self,ctx,*,text):
