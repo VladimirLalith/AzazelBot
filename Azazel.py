@@ -174,10 +174,10 @@ class MyHelpCommand(commands.MinimalHelpCommand):
 client.help_command = MyHelpCommand()
 
 
-@client.command()
+@client.command(aliases=['sd'])
 @commands.is_owner()
 async def shutdown(ctx):
-    await ctx.bot.logout()
+    await client.close()
 
 
 
