@@ -50,7 +50,7 @@ class Emojis(commands.Cog):
     @commands.command(aliases=['ep'])
     async def emojipain(self,ctx):
         """Gives a pain emoji."""
-        await ctx.send(f'<:linuspain:885124579729735721>')  
+        await ctx.send(f'<:blobpain:894079093681848330>')  
 
     @commands.command(aliases=['ehn'])
     async def emojihmmno(self,ctx):
