@@ -62,8 +62,7 @@ async def on_message(message):
     mention = f'<@!{753081438693228625}>'
     mention1 = f'<@!{880341079218589706}>'
     if mention in message.content:
-        await message.add_reaction(f'<:wtf:851001414175555604>')
-        await message.add_reaction(f'<:Gun:855112427624333373>')
+        await message.add_reaction(f'<a:peepwalk:893715193744470027>')
     if mention1 in message.content:
         await message.channel.send(' `a.help` run करो.:expressionless:')  
     else:

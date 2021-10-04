@@ -15,7 +15,7 @@ class Emojis(commands.Cog):
     @commands.command(aliases=['et'])
     async def emojithink(self,ctx):
         """Gives a thinking emoji."""
-        await ctx.send(f'<:Hmmm:810165982060478494>')    
+        await ctx.send(f'<a:froghmm:893714493740294224>')    
 
     @commands.command(aliases=['eo'])
     async def emojioops(self,ctx):
@@ -25,7 +25,7 @@ class Emojis(commands.Cog):
     @commands.command(aliases=['es','ec'])
     async def emojisadcry(self,ctx):
         """Gives a sad/crying emoji."""
-        await ctx.send(f'<:catcrii:881867368358363146>')
+        await ctx.send(f'<a:peepsadsip:893715149934985216>')
 
     @commands.command(aliases=['eok'])    
     async def emojiok(self,ctx):
@@ -35,7 +35,7 @@ class Emojis(commands.Cog):
     @commands.command(aliases=['ex'])
     async def emojiexit(self,ctx):
         """Gives an exiting emoji."""
-        await ctx.send(f"<:pepe_exit:810165976913018910>")
+        await ctx.send(f"<a:peepwalk:893715193744470027>")
 
     @commands.command(aliases=['esw'])
     async def emojisweat(self,ctx):
@@ -50,22 +50,33 @@ class Emojis(commands.Cog):
     @commands.command(aliases=['ep'])
     async def emojipain(self,ctx):
         """Gives a pain emoji."""
-        await ctx.send(f'<:painn:810165970453921842>')  
+        await ctx.send(f'<:lttpain:893714668663734284>')  
 
     @commands.command(aliases=['ehn'])
     async def emojihmmno(self,ctx):
         """Gives a hmmnope."""
-        await ctx.send(f'<:hmmnope:891160212445229086>')    
+        await ctx.send(f'<:peepxtremhmm:893715203882123275>')    
 
     @commands.command(aliases=['epr'])
     async def emojipray(self,ctx):
         """Gives praying emoji."""
-        await ctx.send(f'<:prayage:892415231203110992>')    
+        await ctx.send(f'<:prayage:893715245292462080>')    
 
-    @commands.command(aliases=['eg'])
-    async def emojigun(self,ctx):
-        """Gives gun emoji."""
-        await ctx.send(f'<:pepe_gun:894082377616351262>')       
+    @commands.command(aliases=['ew'])
+    async def emojiworry(self,ctx):
+        """Gives a worried emoji.""" 
+        await ctx.send(f'<a:frogworryrun:893714543245672468>')
+
+    @commands.command(aliases=['elg'])
+    async def emojilesgo(self,ctx):
+        """Gives a lesgo emoji."""
+        await ctx.send(f'<:pandalesgo:893714821231542273>')      
+
+    @commands.command(aliases=['eb'])
+    async def emojibruh(self,ctx):
+        """Gives a bruh emoji.""" 
+        await ctx.send(f'<:lttbruh:893714586669285386> ')        
+
 
     @commands.command(aliases=['em'])
     async def emojify(self,ctx,*,text):
