@@ -75,7 +75,12 @@ class Emojis(commands.Cog):
     @commands.command(aliases=['eb'])
     async def emojibruh(self,ctx):
         """Gives a bruh emoji.""" 
-        await ctx.send(f'<:lttbruh:893714586669285386> ')        
+        await ctx.send(f'<:lttbruh:893714586669285386> ')    
+
+    @commands.command(aliases=['esp'])
+    async def emojispace(self,ctx):
+        """Gives a going through space emote."""
+        await ctx.send(f'<a:peepspace:893715167332925512>')        
 
 
     @commands.command(aliases=['em'])
