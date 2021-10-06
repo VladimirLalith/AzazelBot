@@ -117,7 +117,7 @@ class Admin(commands.Cog):
         """Gives the source code of the bot."""
         embed=discord.Embed(
             title='Source',
-            description='Code of the bot.(Dont copy the code anyways its garbage.)',
+            description='Code of the bot.(Dont copy the code anyways its garbage.<:TrashCan:873917151961026601>)',
             color=discord.Color.dark_gold()
         )    
         view=discord.ui.View()

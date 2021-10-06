@@ -51,6 +51,7 @@ class Fun(commands.Cog):
         embed= discord.Embed(title=f"{ctx.author} has flipped the coin!", description=f"`{flip}` it is!")
         await ctx.send(embed=embed)
 
+
     
 
 def setup(bot):
