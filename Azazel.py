@@ -64,7 +64,7 @@ async def on_message(message):
     if mention in message.content:
         await message.add_reaction(f'<a:peepwalk:893715193744470027>')
     if mention1 in message.content:
-        await message.channel.send(' `a.help` run करो.:expressionless:')  
+        await message.channel.send(' `a.help` run करो.<a:triggered:893715398028050472>')  
     else:
         await client.process_commands(message)
         
