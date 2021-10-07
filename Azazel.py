@@ -10,7 +10,7 @@ from discord import Intents
 intent = Intents().all()
 
 
-TOKEN = 'ODgwMzQxMDc5MjE4NTg5NzA2.YSc3hQ.qesm26Kwtc64sk3y4o5LYRBmFYs'
+TOKEN = 'ODgwMzQxMDc5MjE4NTg5NzA2.YSc3hQ.W45LAe9ha6ss82EyBfrqgjrtUDY'
 
 client = commands.Bot(command_prefix='a.')
 
@@ -176,8 +176,39 @@ client.help_command = MyHelpCommand()
 @client.command(aliases=['sd'])
 @commands.is_owner()
 async def shutdown(ctx):
+    await ctx.send('I am gonna shutdown.<a:pandasnap:893715060822786048>')
     await client.close()
 
+
+word='discord'
+user_guesses= list()
+
+@client.command(aliases=['hm'])
+async def hangman(ctx,guess:str):
+        progress_word=''
+        guess= guess.lower()
+
+        if len(user_guesses) == 4:
+            await ctx.send(f'```You couldnt find the correct answer.```<a:pandasnap:893715060822786048> `ANSWER`: {word}.')
+            
+            return
+
+        for c in word.lower():
+            if guess==c or c in user_guesses:
+                progress_word+=c
+            else:
+                progress_word+='\_.'
+        user_guesses.append(guess)
+
+        if guess==word:
+            await ctx.send('Damn!, you won.<a:pandaclap:893714731330838549>')    
+            return   
+        else:
+            await ctx.send('`Progress`:  %s'% progress_word)
+            
+            
+
+             
 
 
 client.run(TOKEN)

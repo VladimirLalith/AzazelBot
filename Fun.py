@@ -17,7 +17,7 @@ class Fun(commands.Cog):
                 """Is the bot cool?"""
                 embed = discord.Embed(
                         title='BotCool?',
-                        description='Ofcourse bruh, its awesome too.:spy:'
+                        description='Ofcourse bruh, its awesome too.<a:pandacool:893714777661136916>'
 
                 )
                 embed.set_thumbnail(url=f'https://www.redwolf.in/image/cache/catalog/stickers/thug-life-glasses-sticker-india-700x700.jpg')
@@ -48,7 +48,7 @@ class Fun(commands.Cog):
             flip= "Heads"
 
         
-        embed= discord.Embed(title=f"{ctx.author} has flipped the coin!", description=f"`{flip}` it is!")
+        embed= discord.Embed(title=f"{ctx.author} has flipped the coin!", description=f"`{flip}` it is!<:pandalesgo:893714821231542273>")
         await ctx.send(embed=embed)
 
 

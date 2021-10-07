@@ -29,7 +29,7 @@ class Game(commands.Cog):
             elif guess == number:
                 await ctx.send('Correct, u have successfully found the no. `YOU WON`:trophy:')
                 return
-        await ctx.send('`GAME OVER.` Hope u enjoyed the game.')
+        await ctx.send('`GAME OVER.` Hope u enjoyed the game.<:frogworry:893714509166936134>')
 
     
     @commands.command()
@@ -45,15 +45,15 @@ class Game(commands.Cog):
         comp_choice = random.choice(rpsGame)
         if user_choice == 'rock':
             if comp_choice == 'rock':
-                await ctx.send(f'Well, that was weird. We tied.\nYour choice: `{user_choice}`\nMy choice: `{comp_choice}`')
+                await ctx.send(f'Well, that was weird<:oop:810165984086327366>. We tied.\nYour choice: `{user_choice}`\nMy choice: `{comp_choice}`')
             elif comp_choice == 'paper':
-                await ctx.send(f'Nice try, but I won that time!!\nYour choice: `{user_choice}`\nMy choice: `{comp_choice}`')
+                await ctx.send(f'Nice try<a:pandaclap:893714731330838549>, but I won that time!!\nYour choice: `{user_choice}`\nMy choice: `{comp_choice}`')
             elif comp_choice == 'scissors':
-                await ctx.send(f"Aw, you beat me. It won't happen again!\nYour choice: `{user_choice}`\nMy choice: `{comp_choice}`")
+                await ctx.send(f"Aw, you beat me<:sdemote:893715360128303155>. It won't happen again!<a:triggered:893715398028050472> \nYour choice: `{user_choice}`\nMy choice: `{comp_choice}`")
 
         elif user_choice == 'paper':
             if comp_choice == 'rock':
-                await ctx.send(f'The pen beats the sword? More like the paper beats the rock!!\nYour choice: `{user_choice}`\nMy choice: `{comp_choice}`')
+                await ctx.send(f'The pen beats the sword?<:wha:893715503024078879> More like the paper beats the rock!!\nYour choice: `{user_choice}`\nMy choice: `{comp_choice}`')
             elif comp_choice == 'paper':
                 await ctx.send(f'Oh, wacky. We just tied. I call a rematch!!\nYour choice: `{user_choice}`\nMy choice: `{comp_choice}`')
             elif comp_choice == 'scissors':
@@ -61,13 +61,13 @@ class Game(commands.Cog):
 
         elif user_choice == 'scissors':
             if comp_choice == 'rock':
-                await ctx.send(f'HAHA!! I JUST CRUSHED YOU!! I rock!!\nYour choice: `{user_choice}`\nMy choice: `{comp_choice}`')
+                await ctx.send(f'HAHA!! I JUST CRUSHED YOU!!<a:pandawwshake:894526903829012521> I rock!!\nYour choice: `{user_choice}`\nMy choice: `{comp_choice}`')
             elif comp_choice == 'paper':
-                await ctx.send(f'Bruh. >: |\nYour choice: `{user_choice}`\nMy choice: `{comp_choice}`')
+                await ctx.send(f'Bruh.<:lttbruh:893714586669285386> |\nYour choice: `{user_choice}`\nMy choice: `{comp_choice}`')
             elif comp_choice == 'scissors':
                 await ctx.send(f"Oh well, we tied.\nYour choice: `{user_choice}`\nMy choice: `{comp_choice}`")
 
-
+        
 
 
 def setup(bot):

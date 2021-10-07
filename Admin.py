@@ -47,7 +47,7 @@ class Admin(commands.Cog):
         embed.add_field(name='BotOwner/BotDeveloper:computer:',value='`ᐯ ᒪ ᗩ ᗪ I#5472`:chicken:',inline=False)
         embed.add_field(name='BotPrefix',value='`a.`',inline=False)
         view = discord.ui.View()
-        view.add_item(discord.ui.Button(label = 'Support Server', url = f'https://discord.gg/FEwkNHzt6g', emoji = f'<a:pandacool:893714777661136916>'))
+        view.add_item(discord.ui.Button(label = 'Support Server', url = f'https://discord.gg/FEwkNHzt6g', emoji = f'<a:pandaclap:893714731330838549>'))
         view.add_item(discord.ui.Button(label='Invite Link',url=f'https://discord.com/api/oauth2/authorize?client_id=880341079218589706&permissions=8&scope=bot',emoji=f'<:prayage:893715245292462080>'))
         
         
