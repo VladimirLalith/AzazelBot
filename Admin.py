@@ -45,9 +45,9 @@ class Admin(commands.Cog):
         embed.set_author(name='Azazel',icon_url='https://images-ext-1.discordapp.net/external/fKAZoYv-XNws-mQQsPFxMldJp9OZ2QFb33FRmoQOaZY/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/880341079218589706/adbf57cf21a882d09b549ecb58d224a8.webp?width=300&height=300')
         
         embed.add_field(name='BotOwner/BotDeveloper:computer:',value='`ᐯ ᒪ ᗩ ᗪ I#5472`:chicken:',inline=False)
-        embed.add_field(name='BotPrefix',value='`a.`',inline=False)
+        embed.add_field(name='BotPrefix',value='`a|`',inline=False)
         view = discord.ui.View()
-        view.add_item(discord.ui.Button(label = 'Support Server', url = f'https://discord.gg/FEwkNHzt6g', emoji = f'<a:pandaclap:893714731330838549>'))
+        view.add_item(discord.ui.Button(label = 'Support Server', url = f'https://discord.gg/6vPmAh4xUM', emoji = f'<a:pandaclap:893714731330838549>'))
         view.add_item(discord.ui.Button(label='Invite Link',url=f'https://discord.com/api/oauth2/authorize?client_id=880341079218589706&permissions=8&scope=bot',emoji=f'<:prayage:893715245292462080>'))
         
         
@@ -79,7 +79,23 @@ class Admin(commands.Cog):
         embed.add_field(name=f"Highest Role", value = f"{member.top_role.mention}")
         embed.add_field(name='Bot?',value=member.bot,inline=False)
 
-        await ctx.send(embed=embed)            
+        await ctx.send(embed=embed)  
+
+    @commands.command(aliases=['av'])
+    async def avatar(self, ctx , member:discord.Member):
+        """Gives the avatar/dp of a user."""
+        avatar = member.avatar.with_static_format('png') if member.avatar else member.default_avatar.with_static_format('png')
+        embed = discord.Embed(
+            title='Avatar',
+            color= member.color,
+         
+        )    
+        embed.set_author(name=f'User Avatar - {member}'),
+        embed.set_image(url=member.avatar),
+        embed.set_footer(text=f'Requested by - {ctx.author}', icon_url= avatar)
+        view = discord.ui.View()
+        view.add_item(discord.ui.Button(label = 'Avatar Link', url = member.avatar.url))
+        await ctx.send(embed=embed,view=view)          
 
 
 
