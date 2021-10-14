@@ -39,17 +39,18 @@ class Admin(commands.Cog):
         
         
 
-        embed.set_footer(text='For more help pls run a.help <command>. Do the similar for categories a.help <category>')
+        embed.set_footer(text='For more help pls run a|help <command>. Do the similar for categories, a|help <category>')
         
         embed.set_thumbnail(url='https://images-ext-1.discordapp.net/external/fKAZoYv-XNws-mQQsPFxMldJp9OZ2QFb33FRmoQOaZY/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/880341079218589706/adbf57cf21a882d09b549ecb58d224a8.webp?width=300&height=300')
         embed.set_author(name='Azazel',icon_url='https://images-ext-1.discordapp.net/external/fKAZoYv-XNws-mQQsPFxMldJp9OZ2QFb33FRmoQOaZY/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/880341079218589706/adbf57cf21a882d09b549ecb58d224a8.webp?width=300&height=300')
         
         embed.add_field(name='BotOwner/BotDeveloper:computer:',value='`ᐯ ᒪ ᗩ ᗪ I#5472`:chicken:',inline=False)
         embed.add_field(name='BotPrefix',value='`a|`',inline=False)
+        embed.add_field(name='BotLanguage',value=f'<:python:896402709333278720>')
         view = discord.ui.View()
         view.add_item(discord.ui.Button(label = 'Support Server', url = f'https://discord.gg/6vPmAh4xUM', emoji = f'<a:pandaclap:893714731330838549>'))
         view.add_item(discord.ui.Button(label='Invite Link',url=f'https://discord.com/api/oauth2/authorize?client_id=880341079218589706&permissions=8&scope=bot',emoji=f'<:prayage:893715245292462080>'))
-        
+        view.add_item(discord.ui.Button(label='Source',url=f'https://github.com/VladimirLalith/AzazelBot',emoji=f'<:pepe_sweat:889902767030796289>'))
         
         await ctx.send(embed=embed,view=view)  
               
@@ -128,18 +129,6 @@ class Admin(commands.Cog):
 
         await ctx.send(embed=embed)
 
-    @commands.command(aliases=['src'])
-    async def source(self,ctx):
-        """Gives the source code of the bot."""
-        embed=discord.Embed(
-            title='Source',
-            description='Code of the bot.(Dont copy the code anyways its garbage.<:TrashCan:873917151961026601>)',
-            color=discord.Color.dark_gold()
-        )    
-        view=discord.ui.View()
-        view.add_item(discord.ui.Button(label='Source',url=f'https://github.com/VladimirLalith/AzazelBot',emoji=f'<:pepe_sweat:889902767030796289>'))
-
-        await ctx.send(embed=embed,view=view)
 
 def setup(bot): # a extension must have a setup function
 	bot.add_cog(Admin(bot))         

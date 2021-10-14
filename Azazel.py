@@ -1,8 +1,11 @@
 import asyncio
+import time
 import discord
 from discord import message
+from discord import player
 from discord.colour import Color
 from discord.components import  SelectOption
+from discord.embeds import Embed
 from discord.ext import commands
 from discord.types.components import _SelectMenuOptional
 from discord import Intents
@@ -19,9 +22,9 @@ TOKEN = 'ODgwMzQxMDc5MjE4NTg5NzA2.YSc3hQ.W45LAe9ha6ss82EyBfrqgjrtUDY'
   
 
 
-client = commands.Bot(command_prefix='a|')
+client = commands.Bot(command_prefix=commands.when_mentioned_or('a|'))
 
-extensions=['Admin','Mathematics','Fun','Utility','Game','ErrorHandler','Expressions','Emojis']
+extensions=['Admin','Mod','Mathematics','Fun','Utility','Game','ErrorHandler','Expressions','Emojis']
 
 if __name__ == '__main__':
     for extension in extensions:
@@ -68,7 +71,7 @@ async def on_message(message):
     mention = f'<@!{753081438693228625}>'
     mention1 = f'<@!{880341079218589706}>'
     if mention in message.content:
-        await message.add_reaction(f'<a:peepwalk:893715193744470027>')
+        await message.add_reaction(f'<a:peaceout:865247515422883880>')
     if mention1 in message.content:
         await message.channel.send(' `a.help` run करो.<a:triggered:893715398028050472>')  
     else:
@@ -138,53 +141,7 @@ class MyHelpCommand(commands.MinimalHelpCommand):
         
 client.help_command = MyHelpCommand()
 
-class MySelect(discord.ui.Select):
-    def __init__(self):
 
-        
-        options = [
-            discord.SelectOption(
-                emoji='\N{CHEESE WEDGE}',
-                label='Cheese',
-                description='A delicious block of cheese',
-            ),
-            discord.SelectOption(
-                emoji='\N{LEAFY GREEN}',
-                label='Lettuce',
-                description='The freshest lettuce in the market',
-            ),
-            discord.SelectOption(
-                emoji='\N{CUCUMBER}',
-                label='Cucumber',
-                description='A rather scrumptious cucumber',
-            ),
-            discord.SelectOption(
-                emoji='\N{ONION}',
-                label='Onion',
-                description='An eye watering onion',
-            ),
-            discord.SelectOption(
-                emoji='\N{GARLIC}',
-                label='Garlic',
-                description='Delicious',
-            ),
-            discord.SelectOption(
-                emoji='\N{CARROT}',
-                label='Carrot',
-                description='The cutest carrots',
-            ),
-            discord.SelectOption(
-                emoji='\N{TOMATO}',
-                label='Tomato',
-                description='The perfect mix of acidity and sweetness',
-            ),
-        ]
-        super().__init__(placeholder='Select a meal', max_values=4, min_values=2, options=options)
-
-    async def callback(self, interaction: discord.Interaction):
-        await interaction.response.send_message(
-            f'You have selected {", ".join(self.values)}.', ephemeral=True
-        )
 
 @client.command(aliases=['sd'])
 @commands.is_owner()
@@ -223,11 +180,67 @@ async def hangman(ctx,guess:str):
 
           
 
-    
-            
-            
+class MyHelpCommand(commands.MinimalHelpCommand):
 
-             
+    async def send_pages(self):
+        destination = self.get_destination()
+        for page in self.paginator.pages:
+            emby = discord.Embed(description=page)
+            await destination.send(embed=emby)    
+
+class MyCog(commands.Cog):
+    def __init__(self, bot):
+        self._original_help_command = bot.help_command
+        bot.help_command = MyHelpCommand()
+        bot.help_command.cog = self
+
+    def cog_unload(self):
+        self.bot.help_command = self._original_help_command
+
+client.help_command= MyHelpCommand()        
+
+import discord
+from discord.ext import commands
+
+
+class Dropdown(discord.ui.Select):
+    def __init__(self):
+
+        # Set the options that will be presented inside the dropdown
+        options = [
+            discord.SelectOption(label='Red', description='Your favourite colour is red', emoji='🟥'),
+            discord.SelectOption(label='Green', description='Your favourite colour is green', emoji='🟩'),
+            discord.SelectOption(label='Blue', description='Your favourite colour is blue', emoji='🟦')
+        ]
+
+        super().__init__(placeholder='Choose your favourite colour...', min_values=1, max_values=1, options=options)
+
+    async def callback(self, interaction: discord.Interaction):
+        await interaction.response.send_message(f'***Your favourite colour is ***:  `{self.values[0]}`', ephemeral=True)
+
+
+class DropdownView(discord.ui.View):
+    def __init__(self):
+        super().__init__()  
+        
+
+        # Adds the dropdown to our view object.
+        self.add_item(Dropdown())
+
+ 
+        
+
+@client.command()
+async def color(ctx):
+    """Sends a message with our dropdown containing colours"""
+
+    # Create the view containing our dropdown
+    view = DropdownView()
+
+    # Sending a message containing our view
+    await ctx.send('Pick your favourite colour:', view=view)
+
+       
 
 
 client.run(TOKEN)
