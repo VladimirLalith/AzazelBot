@@ -15,25 +15,36 @@ class Game(commands.Cog):
     def __init__(self, bot):
             self.bot = bot    
     
-    @commands.command(aliases=['gn'])
-    async def guessno(self, ctx):
-        number = random.randint(0, 50)
-        for i in range(0,5):
-            await ctx.send('Guess the no. between 0-50')
-            response = await self.bot.wait_for('message')
-            guess = int(response.content)
-            if guess > number:
-                await ctx.send('Your no. was bigger than the actual one, `Pls try Again`')
-            elif guess < number:
-                await ctx.send('Your no. was smaller than the actual one, `Pls try Again`')
-            elif guess == number:
-                await ctx.send('Correct, u have successfully found the no. `YOU WON`:trophy:')
-                return
-        await ctx.send('`GAME OVER.` Hope u enjoyed the game.<:frogworry:893714509166936134>')
+    @commands.command(aliases=['gtn','gn'])
+    async def guessthenumber(self,ctx):
+        def check(m):
+            return m.author == ctx.author and m.channel == ctx.message.channel
+
+        number = random.randint(1, 100)
+        await ctx.send('`I have a number in mind between 1 and 100, guess`')
+
+        for i in range(0, 5):
+            await ctx.send("Your guess:")
+            guess = await self.bot.wait_for(event='message', check=check, timeout=60)
+
+            if guess.content == number:
+                await ctx.send('`You got it!`<:peepyeaboi:893715233401602078>')
+
+            elif guess.content < str(number):
+                await ctx.send('`The no. you entered was lower!`.Try Again')
+
+            elif guess.content > str(number):
+                await ctx.send('`The no. you entered was higher!`.`Try Again`')
+
+            else:
+                return # Or something else
+            
+        else:
+            await ctx.send("*You lost<:sdemote:893715360128303155>, type `a|gtn` or `@Azazel gtn` to play again.*")
 
     
-    @commands.command()
-    async def rps(self,ctx):
+    @commands.command(aliases=['rps'])
+    async def rockpaperscissors(self,ctx):
         rpsGame = ['rock', 'paper', 'scissors']
         await ctx.send(f"`Rock`, `paper`, or `scissors`? Choose wisely...")
 

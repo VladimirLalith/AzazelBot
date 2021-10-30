@@ -1,7 +1,9 @@
 from logging import exception
+import os
 from typing import Optional
 import discord
-
+import inspect
+from discord import client
 from discord.ext import commands
 from discord.ext.commands import bot
 from discord.ext.commands.core import command
@@ -29,11 +31,17 @@ class Admin(commands.Cog):
         await ctx.send(embed=embed)
 
     @commands.command()
+    async def dm(self,ctx,member:discord.Member,*,message):
+        author=ctx.author
+        await member.send(f"`Message from {author}`:\n`{message}` ")
+        await ctx.send('`Message has been sent`<:WinCheck:898572324490604605>')            
+
+    @commands.command()
     async def info(self,ctx, member = discord.Member):
         """Gives info of the bot."""
         embed = discord.Embed(
             title = 'BotInfo',
-            description = 'Azazel is a bot made for doing fun/cool stuff, for now its just a newbie but gradually it will increase its potential.',
+            description = 'Azazel is a bot made for simple Moderation tasks / Fun stuff / Emojis / Etc..., for now its just a newbie but gradually it will increase its potential.',
             
         )
         
@@ -41,20 +49,67 @@ class Admin(commands.Cog):
 
         embed.set_footer(text='For more help pls run a|help <command>. Do the similar for categories, a|help <category>')
         
-        embed.set_thumbnail(url='https://images-ext-1.discordapp.net/external/fKAZoYv-XNws-mQQsPFxMldJp9OZ2QFb33FRmoQOaZY/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/880341079218589706/adbf57cf21a882d09b549ecb58d224a8.webp?width=300&height=300')
-        embed.set_author(name='Azazel',icon_url='https://images-ext-1.discordapp.net/external/fKAZoYv-XNws-mQQsPFxMldJp9OZ2QFb33FRmoQOaZY/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/880341079218589706/adbf57cf21a882d09b549ecb58d224a8.webp?width=300&height=300')
+        embed.set_thumbnail(url='https://cdn.discordapp.com/avatars/880341079218589706/a28882a4b22b7b4b03a0e860966d406d.png?size=1024')
+        embed.set_author(name='Azazel',icon_url='https://cdn.discordapp.com/avatars/880341079218589706/a28882a4b22b7b4b03a0e860966d406d.png?size=1024')
         
         embed.add_field(name='BotOwner/BotDeveloper:computer:',value='`ᐯ ᒪ ᗩ ᗪ I#5472`:chicken:',inline=False)
-        embed.add_field(name='BotPrefix',value='`a|`',inline=False)
-        embed.add_field(name='BotLanguage',value=f'<:python:896402709333278720>')
+        embed.add_field(name='BotPrefix',value='`a?`',inline=False)
+        embed.add_field(name='BotLanguage',value=f'<:WinPython:898614277018124308>')
+        embed.add_field(name="Analytics:",value=f"**Servers:** {len([g.id for g in self.bot.guilds])} servers\n**Users:** {len([g.id for g in self.bot.users])}", inline = True)
+        embed.add_field(name="On Discord Since:",value=f"<t:{round(ctx.me.created_at.timestamp())}:D>",inline=True)        
         view = discord.ui.View()
-        view.add_item(discord.ui.Button(label = 'Support Server', url = f'https://discord.gg/6vPmAh4xUM', emoji = f'<a:pandaclap:893714731330838549>'))
-        view.add_item(discord.ui.Button(label='Invite Link',url=f'https://discord.com/api/oauth2/authorize?client_id=880341079218589706&permissions=8&scope=bot',emoji=f'<:prayage:893715245292462080>'))
-        view.add_item(discord.ui.Button(label='Source',url=f'https://github.com/VladimirLalith/AzazelBot',emoji=f'<:pepe_sweat:889902767030796289>'))
+        view.add_item(discord.ui.Button(label = 'Support Server', url = f'https://discord.gg/6vPmAh4xUM', emoji = f'<:ehe:894097825514790983>'))
+        view.add_item(discord.ui.Button(label='Invite Link',url=f'https://discord.com/api/oauth2/authorize?client_id=880341079218589706&permissions=8&scope=bot',
+            emoji=f'<:prayage:893715245292462080>'))
+        view.add_item(discord.ui.Button(label='Source',url=f'https://github.com/VladimirLalith/AzazelBot',emoji=f'<:github:898810801605980220>'))
         
         await ctx.send(embed=embed,view=view)  
               
-               
+    @commands.command(aliases  = ['src'])
+    async def source(self, ctx, *, command: str = None):
+        """Displays my full source code or for a specific command.
+        To display the source code of a subcommand you can separate it by
+        periods, e.g. tag.create for a create subcommand of the tag command
+        or by spaces.
+        """
+        view = discord.ui.View()
+        source_url = 'https://github.com/VladimirLalith/AzazelBot'
+        #Github link to the source code repo
+        branch = 'main'
+        #The branch which the current repo uses
+        emoji = "<:github:889018277815279676>"
+        #Make sure to replace the emoji with one that your bot is in, incase it isn't in Woodlands
+
+        if command is None:
+            view.add_item(discord.ui.Button(style=discord.ButtonStyle.link, url = source_url, label = "Source", emoji = emoji))
+            return await ctx.send("`Repository`", view = view)
+        
+        obj = self.bot.get_command(command.replace('.', ' '))
+
+        if command == 'help':
+            src = type(self.bot.help_command)
+            module = src.__module__
+            filename = inspect.getsourcefile(src)
+        else:
+            if obj is None:
+                return await ctx.send(f'`Could not find command`: {command}')
+
+
+            # since we found the command we're looking for, presumably anyway, let's
+            # try to access the code itself
+            src = obj.callback.__code__
+            module = obj.callback.__module__
+            filename = src.co_filename
+
+        
+        if not module.startswith('discord') or command == 'help':
+            # not a built-in command
+            location = os.path.relpath(filename).replace('\\', '/').split("Program Files")[-1]
+        else:
+            location = module.replace('.', '/') + '.py'
+        final_url = f'{source_url}/blob/{branch}/{location}'.replace(" ","%20")
+        view.add_item(discord.ui.Button(style=discord.ButtonStyle.link, url = final_url, label = "Source", emoji = emoji))
+        await ctx.send(f"`Source for`: `{obj.qualified_name}`", view = view)               
 
 
 
@@ -82,7 +137,7 @@ class Admin(commands.Cog):
 
         await ctx.send(embed=embed)  
 
-    @commands.command(aliases=['av'])
+    @commands.command(aliases=['av','dp','pfp'])
     async def avatar(self, ctx , member:discord.Member):
         """Gives the avatar/dp of a user."""
         avatar = member.avatar.with_static_format('png') if member.avatar else member.default_avatar.with_static_format('png')
@@ -128,6 +183,8 @@ class Admin(commands.Cog):
         embed.add_field(name="Member Count", value=memberCount, inline=False)
 
         await ctx.send(embed=embed)
+
+        
 
 
 def setup(bot): # a extension must have a setup function
